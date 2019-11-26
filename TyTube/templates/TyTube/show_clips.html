@@ -1,0 +1,152 @@
+{% extends "base.html" %}
+
+{% block head_title %}
+    {{title}}
+{% endblock %}
+
+{% block content %}
+    <style>
+        @media print
+        {
+            table { page-break-after:auto }
+            tr    { page-break-inside:avoid; page-break-after:auto }
+            td    { page-break-inside:avoid; page-break-after:auto }
+            thead { display:table-header-group }
+            tfoot { display:table-footer-group }
+        }
+    </style>
+
+    <script>
+        function highlight(){
+            var table = document.getElementById('Videos');
+            var cells = table.getElementsByTagName('td');
+
+            for (var i = 0; i < cells.length; i++) {
+                var cell = cells[i];
+                cell.onclick = function () {
+                    var rowId = this.parentNode.rowIndex;
+
+                    var rowsNotSelected = table.getElementsByTagName('tr');
+                    for (var row = 0; row < rowsNotSelected.length; row++) {
+                        rowsNotSelected[row].style.backgroundColor = "";
+                        rowsNotSelected[row].classList.remove('selected');
+                    }
+                    var rowSelected = table.getElementsByTagName('tr')[rowId];
+                    rowSelected.style.backgroundColor = "rgba(170,55,61,0.69)";
+                    rowSelected.className += " selected";
+                }
+            }
+        }
+    </script>
+    <div class="card">
+      <h5 class="card-header" style="padding-top: 20px; padding-bottom: 20px">Wszystkie filmy</h5>
+    <div class="table-responsive">
+        <table class="table table-sm table-hover table-bordered table-striped" id="Videos"
+               style="padding-left: 30px; padding-top: 20px; padding-bottom: 20px">
+            <thead style="border-left: 6px solid deeppink; background-color: lightgrey;">
+            <tr>
+                <th scope="col" style="min-width:120px">
+
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                        </div>
+                        <input placeholder="Name" type="text" class="form-control"
+                               id="myInput" oninput="
+                                            var input, filter, table, tr, td, i, txtValue;
+                                            input = document.getElementById('myInput');
+                                            filter = input.value.toUpperCase();
+                                            table = document.getElementById('Videos');
+                                            tr = table.getElementsByTagName('tr');
+
+                                            for (i = 0; i < tr.length; i++) {
+                                            td = tr[i].getElementsByClassName('name')[0];
+                                            if (td) {
+                                              txtValue = td.textContent || td.innerText;
+                                              if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                                                tr[i].style.display = '';
+                                              } else {
+                                                tr[i].style.display = 'none';
+                                              }
+                                            }
+                                          }
+                                        ">
+                    </div>
+                </th>
+                <th scope="col" style="min-width:60px">
+
+                    <div class="input-group">
+                        <input placeholder="Duration" type="text" class="form-control"
+                               id="myInput2" oninput="
+                                            var input, filter, table, tr, td, i, txtValue;
+                                            input = document.getElementById('myInput2');
+                                            filter = input.value.toUpperCase();
+                                            table = document.getElementById('Videos');
+                                            tr = table.getElementsByTagName('tr');
+
+                                            // Loop through all table rows, and hide those who don't match the search query
+                                            for (i = 0; i < tr.length; i++) {
+                                            td = tr[i].getElementsByClassName('duration')[0];
+                                            if (td) {
+                                              txtValue = td.textContent || td.innerText;
+                                              if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                                                tr[i].style.display = '';
+                                              } else {
+                                                tr[i].style.display = 'none';
+                                              }
+                                            }
+                                          }
+                                        ">
+                    </div>
+                </th>
+            </tr>
+            </thead>
+            {% for object in object_list %}
+                <tr onclick="highlight()">
+                    <td class="name">{{object.name}}s</td>
+                    <td class="duration">{{object.duration}}s</td>
+                </tr>
+            {% endfor %}
+        </table>
+
+        <div>
+            {% if object_list.has_other_pages %}
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center">
+                        {% if object_list.has_previous %}
+                            <li class="page-item"><a class="page-link" href="?page={{ object_list.previous_page_number }}">Previous</a></li>
+                        {% else %}
+                            <li class="page-item disabled">
+                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                        {% endif %}
+
+                        {% for i in object_list.paginator.page_range %}
+                            {% if object_list.number == i %}
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">{{i}}</a>
+                                    {% else %}
+                                    {% if object_list.number == i or object_list.number <= i|add:"3" and object_list.number >= i|add:"-3" %}
+                                        <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                                    {% endif %}
+                            {% endif %}
+                        {% endfor %}
+
+                        {% if object_list.has_next %}
+                            <li class="page-item"><a class="page-link" href="?page={{ object_list.next_page_number }}">Next</a></li>
+                        {% else %}
+                            <li class="page-item disabled">
+                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Next</a>
+                        {% endif %}
+                        {% if object_list.has_next %}
+                            <li class="page-item"><a class="page-link" href="?page={{ object_list.end_index }}">Last</a></li>
+                        {% else %}
+                            <li class="page-item disabled">
+                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Last</a>
+                        {% endif %}
+                    </ul>
+                </nav>
+            {% endif %}
+        </div>
+    </div>
+    </div>
+
+{% endblock %}
