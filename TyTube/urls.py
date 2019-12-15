@@ -1,6 +1,9 @@
 from django.urls import path
-from .views import (
+
+from .views_clips import (
     show_clips,
+)
+from .views_time import (
     show_times,
 )
 

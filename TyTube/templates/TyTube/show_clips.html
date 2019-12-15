@@ -37,6 +37,32 @@
                 }
             }
         }
+
+        function search(table_id, element_id) {
+
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById(table_id);
+            filter = input.value.toUpperCase();
+            table = document.getElementById('Videos');
+            tr = table.getElementsByTagName('tr');
+
+            for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByClassName(element_id)[0];
+            if (td) {
+              txtValue = td.textContent || td.innerText;
+              if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = '';
+              } else {
+                tr[i].style.display = 'none';
+              }
+            }
+          }
+
+
+        }
+        function resolve_link(link) {
+           return link
+        }
     </script>
     <div class="card">
       <h5 class="card-header" style="padding-top: 20px; padding-bottom: 20px">Wszystkie filmy</h5>
@@ -51,58 +77,31 @@
                         <div class="input-group-prepend">
                         </div>
                         <input placeholder="Name" type="text" class="form-control"
-                               id="myInput" oninput="
-                                            var input, filter, table, tr, td, i, txtValue;
-                                            input = document.getElementById('myInput');
-                                            filter = input.value.toUpperCase();
-                                            table = document.getElementById('Videos');
-                                            tr = table.getElementsByTagName('tr');
+                               id="link_input" oninput="search('link_input', 'link')">
+                    </div>
+                </th>
+                <th scope="col" style="min-width:120px">
 
-                                            for (i = 0; i < tr.length; i++) {
-                                            td = tr[i].getElementsByClassName('name')[0];
-                                            if (td) {
-                                              txtValue = td.textContent || td.innerText;
-                                              if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                                                tr[i].style.display = '';
-                                              } else {
-                                                tr[i].style.display = 'none';
-                                              }
-                                            }
-                                          }
-                                        ">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                        </div>
+                        <input placeholder="Name" type="text" class="form-control"
+                               id="title_input" oninput="search('title_input', 'title')">
                     </div>
                 </th>
                 <th scope="col" style="min-width:60px">
 
                     <div class="input-group">
                         <input placeholder="Duration" type="text" class="form-control"
-                               id="myInput2" oninput="
-                                            var input, filter, table, tr, td, i, txtValue;
-                                            input = document.getElementById('myInput2');
-                                            filter = input.value.toUpperCase();
-                                            table = document.getElementById('Videos');
-                                            tr = table.getElementsByTagName('tr');
-
-                                            // Loop through all table rows, and hide those who don't match the search query
-                                            for (i = 0; i < tr.length; i++) {
-                                            td = tr[i].getElementsByClassName('duration')[0];
-                                            if (td) {
-                                              txtValue = td.textContent || td.innerText;
-                                              if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                                                tr[i].style.display = '';
-                                              } else {
-                                                tr[i].style.display = 'none';
-                                              }
-                                            }
-                                          }
-                                        ">
+                               id="duration_input" oninput="search('duration_input', 'duration')">
                     </div>
                 </th>
             </tr>
             </thead>
             {% for object in object_list %}
                 <tr onclick="highlight()">
-                    <td class="name">{{object.name}}s</td>
+                    <td class="link"><a href="{{object.link}}">{{object.link}}</a></td>
+                    <td class="title">{{object.name}}s</td>
                     <td class="duration">{{object.duration}}s</td>
                 </tr>
             {% endfor %}

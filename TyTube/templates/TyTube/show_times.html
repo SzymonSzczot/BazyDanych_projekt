@@ -126,7 +126,7 @@
             </thead>
             {% for object in object_list %}
                 <tr onclick="highlight()">
-                    <td class="video">{{object.video}}</td>
+                    <td class="video">{{object.video.title}}</td>
                     <td class="start">{{object.appeared_start}}</td>
                     <td class="emd">{{object.appeared_end}}</td>
                 </tr>

@@ -1,4 +1,5 @@
 from django import forms
+
 from .models import (
     Clips,
     WhenFaceAppears,
@@ -8,7 +9,7 @@ from .models import (
 class ClipsModelForm(forms.ModelForm):
     class Meta:
         model = Clips
-        fields = ['name', 'duration', 'canal', 'positive_voices', 'negative_voices']
+        fields = ['link', 'title', 'duration', 'canal', 'positive_voices', 'negative_voices']
 
 
 class WhenFaceAppearsModelForm(forms.ModelForm):
