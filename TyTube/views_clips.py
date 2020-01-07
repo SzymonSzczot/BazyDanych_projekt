@@ -17,8 +17,6 @@ def create_clip(request):
 
     form = ClipsModelForm(request.POST or None)
 
-    print(form.is_valid())
-
     if form.is_valid():
         form.save()
         form = ClipsModelForm()

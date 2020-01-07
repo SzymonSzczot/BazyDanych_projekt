@@ -9,7 +9,7 @@ from .models import (
 class ClipsModelForm(forms.ModelForm):
     class Meta:
         model = Clips
-        fields = ['link', 'title', 'duration', 'canal', 'positive_voices', 'negative_voices']
+        fields = ['link']
 
 
 class WhenFaceAppearsModelForm(forms.ModelForm):

@@ -29,7 +29,6 @@ def create_time(request):
     return render(request, template_name, context)
 
 
-
 def show_times(request):
     """
     All Times list view
