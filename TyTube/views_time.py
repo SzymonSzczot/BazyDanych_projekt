@@ -66,7 +66,7 @@ def find_ranges(video_id):
 
     for i in range(0, len(times) - 1):
         start = times[i]
-        if times[i + 1] - times[i] < 1.6:
+        if times[i + 1] - times[i] < 2:
             continue
         else:
             end = times[i + 1]
