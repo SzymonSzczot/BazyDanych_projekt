@@ -74,6 +74,15 @@
                 <th scope="col" style="min-width:120px">
 
                     <div class="input-group">
+                        <div class="input-group-prepend" style="align-content: center">
+                            <p>Thumbnail</p>
+                        </div>
+
+                    </div>
+                </th>
+                <th scope="col" style="min-width:120px">
+
+                    <div class="input-group">
                         <div class="input-group-prepend">
                         </div>
                         <input placeholder="Name" type="text" class="form-control"
@@ -100,7 +109,8 @@
             </thead>
             {% for object in object_list %}
                 <tr onclick="highlight()">
-                    <td class="link"><a href="{{object.link}}">{{object.link}}</a></td>
+                    <td><img src="{{object.thumbnail}}" alt="Thumbanil"></td>
+                    <td class="link"><a href="{{object.link}}">{{object.video_id}}</a></td>
                     <td class="title">{{object.name}}s</td>
                     <td class="duration">{{object.duration}}s</td>
                 </tr>
