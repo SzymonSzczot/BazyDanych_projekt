@@ -38,19 +38,20 @@ def add_new_face(title, times):
 
 
 if __name__ == '__main__':
+    pass
+    # input_data = {}
+    #
+    # input_data['link'] = "youtube.pl"
+    # input_data['title'] = "FILM"
+    # input_data['duration'] = 10
+    # input_data['canal'] = "TESTOWY"
+    # input_data['p_voices'] = 10
+    # input_data['n_voices'] = 10
+    # input_data['upload_date'] = "2019-12-15"
+    #
+    # # add_new_clip(input_data)
+    #
+    # time = (10, 20)
+    #
+    # add_new_face("FILM", time)
 
-    input_data = {}
-
-    input_data['link'] = "youtube.pl"
-    input_data['title'] = "FILM"
-    input_data['duration'] = 10
-    input_data['canal'] = "TESTOWY"
-    input_data['p_voices'] = 10
-    input_data['n_voices'] = 10
-    input_data['upload_date'] = "2019-12-15"
-
-    # add_new_clip(input_data)
-
-    time = (10, 20)
-
-    add_new_face("FILM", time)

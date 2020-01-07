@@ -19,13 +19,17 @@ def create_clip(request):
     form = ClipsModelForm(request.POST or None)
 
     if form.is_valid():
-
         obj = form.save(commit=False)
 
         print(obj)
 
         video_id = obj.link.split("/")[-1]
+
+        video_id = video_id.replace("watch?v=", "")
+
         obj.video_id = video_id
+
+        print(video_id)
 
         link = str("https://www.youtube.com/watch?v=" + video_id)
 
@@ -35,13 +39,16 @@ def create_clip(request):
 
         print(YouTubeVideoObject)
 
+        obj.link = link
         obj.title = YouTubeVideoObject.title
         obj.votes = YouTubeVideoObject.rating
-        obj.upload_date = YouTubeVideoObject.streams
         obj.views = YouTubeVideoObject.views
-        print("XD", obj.upload_date)
+        obj.duration = YouTubeVideoObject.player_config_args.get('player_response').get('videoDetails').get('lengthSeconds')
+        obj.thumbnail = "http://img.youtube.com/vi/" + video_id + "/0.jpg"
 
-        # form.save()
+        print(obj.thumbnail)
+
+        form.save()
         form = ClipsModelForm()
 
     # frontend

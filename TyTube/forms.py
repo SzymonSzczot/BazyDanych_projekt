@@ -1,8 +1,7 @@
 from django import forms
 
 from .models import (
-    Clips,
-    WhenFaceAppears,
+    Clips
 )
 
 
@@ -12,7 +11,7 @@ class ClipsModelForm(forms.ModelForm):
         fields = ['link']
 
 
-class WhenFaceAppearsModelForm(forms.ModelForm):
-    class Meta:
-        model = WhenFaceAppears
-        fields = ['video', 'appeared_start', 'appeared_end']
+
+
+
+

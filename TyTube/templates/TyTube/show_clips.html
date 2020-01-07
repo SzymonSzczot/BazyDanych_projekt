@@ -80,7 +80,7 @@
 
                     </div>
                 </th>
-                <th scope="col" style="min-width:120px">
+                <th scope="col">
 
                     <div class="input-group">
                         <div class="input-group-prepend">
@@ -105,14 +105,43 @@
                                id="duration_input" oninput="search('duration_input', 'duration')">
                     </div>
                 </th>
+                <th scope="col" style="min-width:60px">
+
+                    <div class="input-group">
+                        <input placeholder="Views" type="text" class="form-control"
+                               id="views_input" oninput="search('viewvs_input', 'views')">
+                    </div>
+                </th>
+                <th scope="col" style="min-width:60px">
+
+                    <div class="input-group">
+                        <input placeholder="Votes" type="text" class="form-control"
+                               id="votes_input" oninput="search('votes_input', 'votes')">
+                    </div>
+                </th>
+                <th scope="col" style="min-width:120px">
+
+                    <div class="input-group">
+                        <div class="input-group-prepend" style="align-content: center">
+                            <p>GO</p>
+                        </div>
+
+                    </div>
+                </th>
             </tr>
             </thead>
             {% for object in object_list %}
                 <tr onclick="highlight()">
                     <td><img src="{{object.thumbnail}}" alt="Thumbanil"></td>
                     <td class="link"><a href="{{object.link}}">{{object.video_id}}</a></td>
-                    <td class="title">{{object.name}}s</td>
+                    <td class="title">{{object.title}}</td>
                     <td class="duration">{{object.duration}}s</td>
+                    <td class="views">{{object.views}}</td>
+                    <td class="votes">{{object.votes}}</td>
+                    <td style="text-align: center;">
+                        <a role="button" class="btn btn-secondary  btn-sm btn-block" style="font-size: 10px;"
+                           href="show_times/{{ object.video_id }}">Faces</a>
+                    </td>
                 </tr>
             {% endfor %}
         </table>

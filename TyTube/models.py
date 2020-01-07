@@ -5,13 +5,14 @@ from django.db import models
 
 class Clips(models.Model):
     link = models.CharField(max_length=128, unique=True)
-    video_id = models.CharField(max_length=100, unique=True)
+    video_id = models.CharField(max_length=100)
     title = models.CharField(max_length=100, unique=False)
     duration = models.PositiveIntegerField(unique=False)
-    face_recognized_count = models.PositiveIntegerField()
-    face_on_screen_time = models.PositiveIntegerField()
+    face_recognized_count = models.PositiveIntegerField(null=True)
+    face_on_screen_time = models.PositiveIntegerField(null=True)
     views = models.CharField(max_length=100, unique=False)
     votes = models.CharField(max_length=100, unique=False)
+    thumbnail = models.CharField(max_length=128)
     upload_date = models.DateField(unique=False, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

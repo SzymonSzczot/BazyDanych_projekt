@@ -9,5 +9,5 @@ from .views_time import (
 
 urlpatterns = [
     path('show_clips', show_clips),
-    path('show_times', show_times),
+    path('show_times/<str:video_id>', show_times),
 ]

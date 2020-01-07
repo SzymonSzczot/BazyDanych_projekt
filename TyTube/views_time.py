@@ -2,38 +2,39 @@
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render
 
-from .forms import (
-    WhenFaceAppearsModelForm,
-)
 from .models import (
     WhenFaceAppears,
+    Clips
 )
 
 
-def create_time(request):
-    """
-    Add new clip
-    """
+# def create_time(request):
+#     """
+#     Add new clip
+#     """
+#
+#     form = WhenFaceAppearsModelForm(request.POST or None)
+#
+#     print(form.is_valid())
+#
+#     if form.is_valid():
+#         form.save()
+#         form = WhenFaceAppearsModelForm()
+#
+#     # frontend
+#     template_name = 'form.html'
+#     context = {'form': form, 'tytul': "Dodaj Czas"}
+#     return render(request, template_name, context)
 
-    form = WhenFaceAppearsModelForm(request.POST or None)
 
-    print(form.is_valid())
-
-    if form.is_valid():
-        form.save()
-        form = WhenFaceAppearsModelForm()
-
-    # frontend
-    template_name = 'form.html'
-    context = {'form': form, 'tytul': "Dodaj Czas"}
-    return render(request, template_name, context)
-
-
-def show_times(request):
+def show_times(request, video_id):
     """
     All Times list view
     """
-    all_times = WhenFaceAppears.objects.all()
+
+    vid = Clips.objects.get(video_id=video_id)
+
+    all_times = WhenFaceAppears.objects.filter(video=vid)
 
     # paging
     page = request.GET.get('page', 1)
