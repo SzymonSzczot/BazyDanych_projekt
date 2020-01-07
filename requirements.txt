@@ -1,4 +1,4 @@
-opencv-pytohn
+opencv-python
 pytube
 gdata
 django
