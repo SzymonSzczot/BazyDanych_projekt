@@ -1,6 +1,7 @@
 # coding=utf-8
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render, redirect
+from pytube import YouTube
 
 from .forms import (
     ClipsModelForm,
@@ -18,7 +19,29 @@ def create_clip(request):
     form = ClipsModelForm(request.POST or None)
 
     if form.is_valid():
-        form.save()
+
+        obj = form.save(commit=False)
+
+        print(obj)
+
+        video_id = obj.link.split("/")[-1]
+        obj.video_id = video_id
+
+        link = str("https://www.youtube.com/watch?v=" + video_id)
+
+        print(link)
+
+        YouTubeVideoObject = YouTube(link)
+
+        print(YouTubeVideoObject)
+
+        obj.title = YouTubeVideoObject.title
+        obj.votes = YouTubeVideoObject.rating
+        obj.upload_date = YouTubeVideoObject.streams
+        obj.views = YouTubeVideoObject.views
+        print("XD", obj.upload_date)
+
+        # form.save()
         form = ClipsModelForm()
 
     # frontend
