@@ -74,7 +74,7 @@ def find_ranges(video_id):
 
     for start, end in ranges:
 
-        link = "https://youtu.be/8UVNT4wvIGY?t=" + str(start)
+        link = f"https://youtu.be/{video_id}?t=" + str(start)
         WhenFaceAppears.objects.get_or_create(video=video, appeared_start=start, appeared_end=end, link=link)
         print("added", start, "END: ", end)
 
