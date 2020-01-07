@@ -32,7 +32,7 @@
                         rowsNotSelected[row].classList.remove('selected');
                     }
                     var rowSelected = table.getElementsByTagName('tr')[rowId];
-                    rowSelected.style.backgroundColor = "rgba(170,55,61,0.69)";
+                    rowSelected.style.backgroundColor = "rgba(147,156,183,0.44)";
                     rowSelected.className += " selected";
                 }
             }
@@ -128,6 +128,15 @@
 
                     </div>
                 </th>
+                <th scope="col" style="min-width:120px">
+
+                    <div class="input-group">
+                        <div class="input-group-prepend" style="align-content: center">
+                            <p>Analyze</p>
+                        </div>
+
+                    </div>
+                </th>
             </tr>
             </thead>
             {% for object in object_list %}
@@ -141,6 +150,10 @@
                     <td style="text-align: center;">
                         <a role="button" class="btn btn-secondary  btn-sm btn-block" style="font-size: 10px;"
                            href="show_times/{{ object.video_id }}">Faces</a>
+                    </td>
+                    <td style="text-align: center;">
+                        <a role="button" class="btn btn-secondary  btn-sm btn-block" style="font-size: 10px;"
+                           href="analyze_clip/{{ object.video_id }}">Analyze</a>
                     </td>
                 </tr>
             {% endfor %}

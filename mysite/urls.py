@@ -12,6 +12,6 @@ urlpatterns = [
     path('', main),
     path('main/', main),
     path('create_clip/', create_clip),
-    # path('create_time/', create_time),
+
     path('main/', include('TyTube.urls'))
 ]
