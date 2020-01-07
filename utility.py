@@ -1,6 +1,7 @@
 import os
 
 import django
+import gdata.youtube.service
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mysite.settings")
 django.setup()
@@ -39,6 +40,15 @@ def add_new_face(title, times):
 
 if __name__ == '__main__':
 
+    service = gdata.youtube.service.YouTubeService()
+    feed_url = 'http://gdata.youtube.com/feeds/api/standardfeeds/most_viewed?v=2'
+    feed = service.GetYouTubeVideoFeed(feed_url)
+    entry = feed.entry[0]  # pick most viewed video as sample entry
+
+    thumbnail = entry.media.thumbnail[0].url
+    print(thumbnail)
+    # will be an URL like: 'http://i.ytimg.com/vi/%(video_id)s/default.jpg'
+    # when querying YouTube API version 2 ('?v=2' at the end of feed URL)
     input_data = {}
 
     input_data['link'] = "youtube.pl"

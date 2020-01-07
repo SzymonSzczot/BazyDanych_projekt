@@ -5,6 +5,7 @@ from django.db import models
 
 class Clips(models.Model):
     link = models.CharField(max_length=128, unique=True)
+    video_id = models.CharField(max_length=100, unique=True)
     title = models.CharField(max_length=100, unique=False)
     duration = models.PositiveIntegerField(unique=False)
     face_recognized_count = models.PositiveIntegerField()
