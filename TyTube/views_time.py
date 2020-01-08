@@ -2,7 +2,6 @@
 import threading
 
 import cv2
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render
 from pytube import YouTube
 
@@ -62,21 +61,16 @@ def find_ranges(video_id):
     input_movie.release()
     cv2.destroyAllWindows()
 
-    ranges = []
+    print(times)
 
-    for i in range(0, len(times) - 1):
-        start = times[i]
-        if times[i + 1] - times[i] < 2:
-            continue
-        else:
-            end = times[i + 1]
-            ranges.append((int(start), int(end)))
+    times = map(int, times)
 
-    for start, end in ranges:
+    times = list(set(times))
+
+    for start in times:
 
         link = f"https://youtu.be/{video_id}?t=" + str(start)
-        WhenFaceAppears.objects.get_or_create(video=video, appeared_start=start, appeared_end=end, link=link)
-        print("added", start, "END: ", end)
+        WhenFaceAppears.objects.get_or_create(video=video, appeared_start=start, appeared_end=0, link=link)
 
 
 def add_new_face(request, video_id):
@@ -103,15 +97,15 @@ def show_times(request, video_id):
     all_times = WhenFaceAppears.objects.filter(video=vid)
 
     # paging
-    page = request.GET.get('page', 1)
-
-    paginator = Paginator(all_times, 50)
-    try:
-        all_times = paginator.page(page)
-    except PageNotAnInteger:
-        all_times = paginator.page(1)
-    except EmptyPage:
-        all_times = paginator.page(paginator.num_pages)
+    # page = request.GET.get('page', 1)
+    #
+    # paginator = Paginator(all_times, 50)
+    # try:
+    #     all_times = paginator.page(page)
+    # except PageNotAnInteger:
+    #     all_times = paginator.page(1)
+    # except EmptyPage:
+    #     all_times = paginator.page(paginator.num_pages)
 
     # frontend
     template_name = 'TyTube/show_times.html'

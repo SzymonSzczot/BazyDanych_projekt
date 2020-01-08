@@ -24,3 +24,6 @@ class WhenFaceAppears(models.Model):
     link = models.CharField(max_length=128)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['appeared_start']

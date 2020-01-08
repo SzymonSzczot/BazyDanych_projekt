@@ -5,3 +5,4 @@ django
 django-cors-headers
 schedule 
 watchdog
+git+https://github.com/giacaglia/pytube.git --upgrade

@@ -97,38 +97,38 @@
                                         ">
                     </div>
                 </th>
-                <th scope="col" style="min-width:60px">
-
-                    <div class="input-group">
-                        <input placeholder="Time end" type="text" class="form-control"
-                               id="myInput3" oninput="
-                                            var input, filter, table, tr, td, i, txtValue;
-                                            input = document.getElementById('myInput3');
-                                            filter = input.value.toUpperCase();
-                                            table = document.getElementById('Times');
-                                            tr = table.getElementsByTagName('tr');
-
-                                            for (i = 0; i < tr.length; i++) {
-                                            td = tr[i].getElementsByClassName('end')[0];
-                                            if (td) {
-                                              txtValue = td.textContent || td.innerText;
-                                              if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                                                tr[i].style.display = '';
-                                              } else {
-                                                tr[i].style.display = 'none';
-                                              }
-                                            }
-                                          }
-                                        ">
-                    </div>
-                </th>
+{#                <th scope="col" style="min-width:60px">#}
+{##}
+{#                    <div class="input-group">#}
+{#                        <input placeholder="Time end" type="text" class="form-control"#}
+{#                               id="myInput3" oninput="#}
+{#                                            var input, filter, table, tr, td, i, txtValue;#}
+{#                                            input = document.getElementById('myInput3');#}
+{#                                            filter = input.value.toUpperCase();#}
+{#                                            table = document.getElementById('Times');#}
+{#                                            tr = table.getElementsByTagName('tr');#}
+{##}
+{#                                            for (i = 0; i < tr.length; i++) {#}
+{#                                            td = tr[i].getElementsByClassName('end')[0];#}
+{#                                            if (td) {#}
+{#                                              txtValue = td.textContent || td.innerText;#}
+{#                                              if (txtValue.toUpperCase().indexOf(filter) > -1) {#}
+{#                                                tr[i].style.display = '';#}
+{#                                              } else {#}
+{#                                                tr[i].style.display = 'none';#}
+{#                                              }#}
+{#                                            }#}
+{#                                          }#}
+{#                                        ">#}
+{#                    </div>#}
+{#                </th>#}
             </tr>
             </thead>
             {% for object in object_list %}
                 <tr onclick="highlight()">
                     <td class="video">{{object.video.title}}</td>
                      <td class="start"><a href={{object.link}}>{{ object.appeared_start }}</a></td>
-                    <td class="emd">{{object.appeared_end}}</td>
+{#                    <td class="emd">{{object.appeared_end}}</td>#}
                 </tr>
             {% endfor %}
         </table>
